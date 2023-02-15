@@ -41,6 +41,7 @@ WARNING!!! WARNING!!!
   // Loop over the names array and say either 'Hello' or "Good Bye"
   // using either the helloSpeaker's or byeSpeaker's 'speak' method.
   // See Lecture 50, part 1
+  console.log("\n\n\nDEBUG: First list starts here: \n\n\n")
   for (var i = 0; i < names.length; i++) {
 
     // STEP 11:
@@ -66,7 +67,7 @@ WARNING!!! WARNING!!!
 
   // 2. In addition to the regular requirements, research how Array.prototype.map function works.
   console.log("\n\n\nDEBUG: Second list starts here: \n\n\n")
-  
+
   printArraySecondTime = function(name){
     name.charAt(0).toLowerCase() === 'j' ? console.log(byeSpeaker.speakSimple(name)) : console.log(helloSpeaker.speakSimple(name));
   }; 

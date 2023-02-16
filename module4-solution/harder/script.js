@@ -68,10 +68,12 @@ WARNING!!! WARNING!!!
   // 2. In addition to the regular requirements, research how Array.prototype.map function works.
   console.log("\n\n\nDEBUG: Second list starts here: \n\n\n")
 
-  printArraySecondTime = function(name){
-    name.charAt(0).toLowerCase() === 'j' ? console.log(byeSpeaker.speakSimple(name)) : console.log(helloSpeaker.speakSimple(name));
+  newArray = []
+  addGreetingToNewArray = function(name){
+    name.charAt(0).toLowerCase() === 'j' ? newArray.push(byeSpeaker.speakSimple(name)) : newArray.push(helloSpeaker.speakSimple(name));
   }; 
-  names.map(name => printArraySecondTime(name));
+  names.map(name => addGreetingToNewArray(name));
+  newArray.map(greeting => console.log(greeting));
 
   // 3. (Bonus/Optional) In addition to the previous requirements, research 
   console.log("\n\n\nDEBUG: Third list starts here: \n\n\n")

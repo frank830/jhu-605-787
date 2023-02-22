@@ -14,6 +14,7 @@ $(function () { // Same as document.addEventListener("DOMContentLoaded"...
 var dc = {};
 
 var homeHtmlUrl = "snippets/home-snippet.html";
+var aboutHtmlUrl = "snippets/about-snippet.html";
 var allCategoriesUrl =
   "https://coursera-jhu-default-rtdb.firebaseio.com/categories.json";
 var categoriesTitleHtml = "snippets/categories-title-snippet.html";
@@ -122,6 +123,32 @@ function buildAndShowHomeHTML (categories) {
     false); // False here because we are getting just regular HTML from the server, so no need to process JSON.
 }
 
+function buildAndShowAboutHTML (randomNum) {
+
+    // var homeHtmlToInsertIntoMainPage = insertProperty(homeHtml, "randomNum",  randomNum);
+
+    // insertHtml("#main-content", homeHtmlToInsertIntoMainPage);
+
+  // Load About snippet page
+  $ajaxUtils.sendGetRequest(
+    aboutHtmlUrl,
+    function (aboutHtml) {
+        var n = 1
+        aboutHtml = insertProperty(aboutHtml, "randomNum",  randomNum);
+        while(randomNum >= 1){
+          aboutHtml = insertProperty(aboutHtml, "class"+n,  "fa fa-star");
+          n += 1
+          randomNum -= 1
+        }
+        while(n <= 5){
+          aboutHtml = insertProperty(aboutHtml, "class"+n,  "fa fa-star-o");
+          n += 1
+        }
+        insertHtml("#main-content", aboutHtml);
+    },
+    false);
+}
+
 
 // Given array of category objects, returns a random category object.
 function chooseRandomCategory (categories) {
@@ -139,6 +166,13 @@ dc.loadMenuCategories = function () {
   $ajaxUtils.sendGetRequest(
     allCategoriesUrl,
     buildAndShowCategoriesHTML);
+};
+
+dc.loadAbout = function () {
+  showLoading("#main-content");
+  // Returns a random integer from 1 to 5:
+  var randomNum = Math.floor(Math.random() * 5) + 1;
+  buildAndShowAboutHTML(randomNum);
 };
 
 

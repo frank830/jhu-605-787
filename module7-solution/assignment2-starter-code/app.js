@@ -4,7 +4,8 @@
     angular.module('ShoppingListCheckOff', [])
     .controller('ShoppingListController1', ShoppingListController1)
     .controller('ShoppingListController2', ShoppingListController2)
-    .service('ShoppingListCheckOffService', ShoppingListCheckOffService);
+    .service('ShoppingListCheckOffService', ShoppingListCheckOffService)
+    .filter('myCurrency', MyCurrencyFilter);
     
     // LIST #1 - controller
     ShoppingListController1.$inject = ['ShoppingListCheckOffService'];
@@ -16,10 +17,6 @@
     
       ToBuyController.displayEmptyMessage = function () {
         return ToBuyController.items.length <= 0? true : false;
-      }
-    
-      ToBuyController.addItem = function () {
-        ShoppingListCheckOffService.addItem(ToBuyController.itemName, ToBuyController.itemQuantity);
       }
     
       ToBuyController.removeItem = function (itemIndex) {
@@ -38,19 +35,18 @@
       AlreadyBoughtController.displayEmptyMessage = function () {
         return AlreadyBoughtController.items.length <= 0? true : false;
       }
-    
-      AlreadyBoughtController.addItem = function () {
-        try {
-            ShoppingListCheckOffService.addItem(AlreadyBoughtController.itemName, AlreadyBoughtController.itemQuantity);
-        } catch (error) {
-            AlreadyBoughtController.errorMessage = error.message;
-        }
-    
+
+      AlreadyBoughtController.calculateTotal = function (quantity, price) {
+        return ShoppingListCheckOffService.calculateTotal(quantity, price);
       }
-    
-      AlreadyBoughtController.removeItem = function (itemIndex) {
-        ShoppingListCheckOffService.removeItem(itemIndex);
-      };
+
+    }
+
+    function MyCurrencyFilter() {
+        return function (totalPrice) {
+          var res = "$$$" + totalPrice;
+          return res;
+        };
     }
     
     
@@ -61,34 +57,31 @@
       var toBuyitems = [
         {
             "name": "Ice cream",
-            "quantity": 5
+            "quantity": 5,
+            "pricePerItem": 6
         },
         {
             "name": "Cookies",
-            "quantity": 10
+            "quantity": 10,
+            "pricePerItem": 2
         },
         {
             "name": "Chocolate",
-            "quantity": 2
+            "quantity": 2,
+            "pricePerItem": 3
         },
         {
             "name": "Candies",
-            "quantity": 3
+            "quantity": 3,
+            "pricePerItem": 2
         },
         {
             "name": "Chips",
-            "quantity": 8
+            "quantity": 8,
+            "pricePerItem": 8
         },
       ]
       var boughtItems = []
-    
-      service.addItem = function (itemName, quantity) {
-          var item = {
-            name: itemName,
-            quantity: quantity
-          };
-          toBuyitems.push(item);
-      };
     
       service.removeItem = function (itemIndex) {
         boughtItems.push(toBuyitems[itemIndex])
@@ -101,6 +94,12 @@
 
       service.getBoughtItems = function () {
         return boughtItems;
+      };
+
+      service.calculateTotal = function (quantity, price) {
+        var total = quantity * price;
+        total = total.toFixed(2);
+        return total;
       };
     }
     

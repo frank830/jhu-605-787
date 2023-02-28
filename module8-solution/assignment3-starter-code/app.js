@@ -2,34 +2,38 @@
     'use strict';
     
     angular.module('NarrowItDownApp', [])
-    .controller('ListController', ListController)
-    .service('MenuSearchService', MenuSearchService);
-    // .directive('foundItems', FoundItems);
+    .controller('NarrowItDownController', NarrowItDownController)
+    .service('MenuSearchService', MenuSearchService)
+    .directive('foundItems', FoundItems);
 
-    // function FoundItems() {
-    //     var ddo = {
-    //       templateUrl: 'foundItems.html',
-    //       scope:{
-    //         foundItems: '@foundItems'
-    //       }
-    //     };
-      
-    //     return ddo;
-    // }
+    function FoundItems() {
+        var ddo = {
+            restrict: 'E',
+            templateUrl: 'foundItems.html',
+            scope: {
+                foundItems: '<',
+            },
+            controller: NarrowItDownController,
+            controllerAs: 'narrow',
+            bindToController: true
+        };
+
+        return ddo;
+    }
     
-    ListController.$inject = ['MenuSearchService'];
-    function ListController(MenuSearchService) {
-        var narrowItDownController = this;
+    NarrowItDownController.$inject = ['MenuSearchService'];
+    function NarrowItDownController(MenuSearchService) {
+        var narrow = this;
 
-        narrowItDownController.searchTerm = "";
-        narrowItDownController.found = [];
+        narrow.searchTerm = "";
+        narrow.found = [];
 
-        narrowItDownController.narrowDown = function(){
-            var promise = MenuSearchService.getMatchedMenuItems(narrowItDownController.searchTerm);
+        narrow.narrowDown = function(){
+            var promise = MenuSearchService.getMatchedMenuItems(narrow.searchTerm);
 
             promise.then(function (response) {
-                narrowItDownController.found = response;
-                console.log(narrowItDownController.found)
+                narrow.found = response;
+                console.log(narrow.found)
             })
             .catch(function (error) {
                 console.log("Something went terribly wrong.");

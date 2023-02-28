@@ -7,18 +7,18 @@
     <link rel="stylesheet" href="styles/styles.css">
   </head>
 <body>
-   <div class="container" ng-controller='ListController as NarrowItDownController' >
+   <div class="container" ng-controller='NarrowItDownController as narrow' >
     <h1>Narrow Down Your Chinese Menu Choice</h1>
 
     <div class="form-group">
-      <input type="text" placeholder="search term" class="form-control" ng-model="NarrowItDownController.searchTerm">
+      <input type="text" placeholder="search term" class="form-control" ng-model="narrow.searchTerm">
     </div>
     <div class="form-group narrow-button">
-      <button class="btn btn-primary" ng-click="NarrowItDownController.narrowDown();">Narrow It Down For Me!</button>
+      <button class="btn btn-primary" ng-click="narrow.narrowDown();">Narrow It Down For Me!</button>
     </div>
 
-    <found-items found-items="...." on-remove="...."></found-items>
-    <!-- <found-items found-items="{{NarrowItDownController.found}}"></found-items> -->
+    <!-- <found-items found-items="...." on-remove="...."></found-items> -->
+    <found-items found-items="narrow.found"></found-items>
 
   </div>
   <script src="angular.min.js"></script>

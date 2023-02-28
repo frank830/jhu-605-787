@@ -19,18 +19,23 @@
     
     ListController.$inject = ['MenuSearchService'];
     function ListController(MenuSearchService) {
-        var list = this;
+        var narrowItDownController = this;
 
-        list.found = [];
+        narrowItDownController.searchTerm = "";
+        narrowItDownController.found = [];
 
-        var promise = MenuSearchService.getMatchedMenuItems();
+        narrowItDownController.narrowDown = function(){
+            var promise = MenuSearchService.getMatchedMenuItems(narrowItDownController.searchTerm);
 
-        promise.then(function (response) {
-            list.found = response;
-        })
-        .catch(function (error) {
-            console.log("Something went terribly wrong.");
-        });
+            promise.then(function (response) {
+                narrowItDownController.found = response;
+                console.log(narrowItDownController.found)
+            })
+            .catch(function (error) {
+                console.log("Something went terribly wrong.");
+            });
+        }
+
     }
 
     MenuSearchService.$inject = ['$http'];

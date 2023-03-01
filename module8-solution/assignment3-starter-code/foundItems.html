@@ -1,6 +1,13 @@
 <ol>
-  <div>list</div>
   <li ng-repeat = "item in narrow.foundItems">
-    <div>{{item.name}}</div>
+    <div class="form-group">
+      <div><h2>{{item.name}}</h2></div>
+      <div><b>short_name</b>: {{item.short_name}}</div>
+      <div><b>description</b>: {{item.description}}</div>
+    </div>
+    <div class="form-group">
+      <button class="btn btn-primary" ng-click="narrow.onRemove({index: $index});">Don't want this one!</button>
+    </div>
   </li>
 </ol>
+<div class="error">{{narrow.message}}</div>

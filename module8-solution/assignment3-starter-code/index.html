@@ -13,12 +13,12 @@
     <div class="form-group">
       <input type="text" placeholder="search term" class="form-control" ng-model="narrow.searchTerm">
     </div>
-    <div class="form-group narrow-button">
+    <div class="form-group">
       <button class="btn btn-primary" ng-click="narrow.narrowDown();">Narrow It Down For Me!</button>
     </div>
 
     <!-- <found-items found-items="...." on-remove="...."></found-items> -->
-    <found-items found-items="narrow.found"></found-items>
+    <found-items found-items="narrow.found"  on-remove="narrow.removeItem(index)" message="narrow.msg"></found-items>
 
   </div>
   <script src="angular.min.js"></script>

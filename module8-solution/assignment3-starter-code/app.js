@@ -12,6 +12,8 @@
             templateUrl: 'foundItems.html',
             scope: {
                 foundItems: '<',
+                onRemove: '&',
+                message: '<'
             },
             controller: NarrowItDownController,
             controllerAs: 'narrow',
@@ -26,19 +28,34 @@
         var narrow = this;
 
         narrow.searchTerm = "";
-        narrow.found = [];
+        narrow.msg = "";
 
         narrow.narrowDown = function(){
-            var promise = MenuSearchService.getMatchedMenuItems(narrow.searchTerm);
+            var noSpaceStr = narrow.searchTerm.trim();
+            console.log("check: ");
+            console.log(noSpaceStr);
+            console.log(narrow.searchTerm);
 
-            promise.then(function (response) {
-                narrow.found = response;
-                console.log(narrow.found)
-            })
-            .catch(function (error) {
-                console.log("Something went terribly wrong.");
-            });
+            if(noSpaceStr.length > 0){
+                var promise = MenuSearchService.getMatchedMenuItems(narrow.searchTerm.toLowerCase());
+
+                promise.then(function (response) {
+                    narrow.found = response;
+                    console.log(narrow.found);
+                    narrow.msg = "";
+                })
+                .catch(function (error) {
+                    console.log("Something went terribly wrong.");
+                });
+            }else{
+                narrow.found = [];
+                narrow.msg = "Nothing found";
+            }
         }
+
+        narrow.removeItem = function (itemIndex) {
+            narrow.found.splice(itemIndex, 1);
+        };
 
     }
 

@@ -32,17 +32,12 @@
 
         narrow.narrowDown = function(){
             var noSpaceStr = narrow.searchTerm.trim();
-            console.log("check: ");
-            console.log(noSpaceStr);
-            console.log(narrow.searchTerm);
-
             if(noSpaceStr.length > 0){
                 var promise = MenuSearchService.getMatchedMenuItems(narrow.searchTerm.toLowerCase());
 
                 promise.then(function (response) {
                     narrow.found = response;
-                    console.log(narrow.found);
-                    narrow.msg = "";
+                    narrow.msg = narrow.found.length <= 0? "Nothing found": "";
                 })
                 .catch(function (error) {
                     console.log("Something went terribly wrong.");
@@ -68,7 +63,6 @@
           method: "GET",
           url: ("https://coursera-jhu-default-rtdb.firebaseio.com/menu_items.json")
         }).then(function(response){
-            console.log(response.data)
             var all_menu_items = response.data;
 
             // process result and only keep items that match

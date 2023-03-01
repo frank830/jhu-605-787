@@ -2,39 +2,60 @@
     'use strict';
     
     angular.module('NarrowItDownApp', [])
-    .controller('ListController', ListController)
-    .service('MenuSearchService', MenuSearchService);
-    // .directive('foundItems', FoundItems);
+    .controller('NarrowItDownController', NarrowItDownController)
+    .service('MenuSearchService', MenuSearchService)
+    .directive('foundItems', FoundItems);
 
-    // function FoundItems() {
-    //     var ddo = {
-    //       templateUrl: 'foundItems.html',
-    //       scope:{
-    //         foundItems: '@foundItems'
-    //       }
-    //     };
-      
-    //     return ddo;
-    // }
+    function FoundItems() {
+        var ddo = {
+            restrict: 'E',
+            templateUrl: 'foundItems.html',
+            scope: {
+                foundItems: '<',
+                onRemove: '&',
+                message: '<'
+            },
+            controller: NarrowItDownController,
+            controllerAs: 'narrow',
+            bindToController: true
+        };
+
+        return ddo;
+    }
     
-    ListController.$inject = ['MenuSearchService'];
-    function ListController(MenuSearchService) {
-        var narrowItDownController = this;
+    NarrowItDownController.$inject = ['MenuSearchService'];
+    function NarrowItDownController(MenuSearchService) {
+        var narrow = this;
 
-        narrowItDownController.searchTerm = "";
-        narrowItDownController.found = [];
+        narrow.searchTerm = "";
+        narrow.msg = "";
 
-        narrowItDownController.narrowDown = function(){
-            var promise = MenuSearchService.getMatchedMenuItems(narrowItDownController.searchTerm);
+        narrow.narrowDown = function(){
+            var noSpaceStr = narrow.searchTerm.trim();
+            console.log("check: ");
+            console.log(noSpaceStr);
+            console.log(narrow.searchTerm);
 
-            promise.then(function (response) {
-                narrowItDownController.found = response;
-                console.log(narrowItDownController.found)
-            })
-            .catch(function (error) {
-                console.log("Something went terribly wrong.");
-            });
+            if(noSpaceStr.length > 0){
+                var promise = MenuSearchService.getMatchedMenuItems(narrow.searchTerm.toLowerCase());
+
+                promise.then(function (response) {
+                    narrow.found = response;
+                    console.log(narrow.found);
+                    narrow.msg = "";
+                })
+                .catch(function (error) {
+                    console.log("Something went terribly wrong.");
+                });
+            }else{
+                narrow.found = [];
+                narrow.msg = "Nothing found";
+            }
         }
+
+        narrow.removeItem = function (itemIndex) {
+            narrow.found.splice(itemIndex, 1);
+        };
 
     }
 

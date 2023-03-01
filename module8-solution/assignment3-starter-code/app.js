@@ -2,39 +2,55 @@
     'use strict';
     
     angular.module('NarrowItDownApp', [])
-    .controller('ListController', ListController)
-    .service('MenuSearchService', MenuSearchService);
-    // .directive('foundItems', FoundItems);
+    .controller('NarrowItDownController', NarrowItDownController)
+    .service('MenuSearchService', MenuSearchService)
+    .directive('foundItems', FoundItems);
 
-    // function FoundItems() {
-    //     var ddo = {
-    //       templateUrl: 'foundItems.html',
-    //       scope:{
-    //         foundItems: '@foundItems'
-    //       }
-    //     };
-      
-    //     return ddo;
-    // }
+    function FoundItems() {
+        var ddo = {
+            restrict: 'E',
+            templateUrl: 'foundItems.html',
+            scope: {
+                foundItems: '<',
+                onRemove: '&',
+                message: '<'
+            },
+            controller: NarrowItDownController,
+            controllerAs: 'narrow',
+            bindToController: true
+        };
+
+        return ddo;
+    }
     
-    ListController.$inject = ['MenuSearchService'];
-    function ListController(MenuSearchService) {
-        var narrowItDownController = this;
+    NarrowItDownController.$inject = ['MenuSearchService'];
+    function NarrowItDownController(MenuSearchService) {
+        var narrow = this;
 
-        narrowItDownController.searchTerm = "";
-        narrowItDownController.found = [];
+        narrow.searchTerm = "";
+        narrow.msg = "";
 
-        narrowItDownController.narrowDown = function(){
-            var promise = MenuSearchService.getMatchedMenuItems(narrowItDownController.searchTerm);
+        narrow.narrowDown = function(){
+            var noSpaceStr = narrow.searchTerm.trim();
+            if(noSpaceStr.length > 0){
+                var promise = MenuSearchService.getMatchedMenuItems(narrow.searchTerm.toLowerCase());
 
-            promise.then(function (response) {
-                narrowItDownController.found = response;
-                console.log(narrowItDownController.found)
-            })
-            .catch(function (error) {
-                console.log("Something went terribly wrong.");
-            });
+                promise.then(function (response) {
+                    narrow.found = response;
+                    narrow.msg = narrow.found.length <= 0? "Nothing found": "";
+                })
+                .catch(function (error) {
+                    console.log("Something went terribly wrong.");
+                });
+            }else{
+                narrow.found = [];
+                narrow.msg = "Nothing found";
+            }
         }
+
+        narrow.removeItem = function (itemIndex) {
+            narrow.found.splice(itemIndex, 1);
+        };
 
     }
 
@@ -47,7 +63,6 @@
           method: "GET",
           url: ("https://coursera-jhu-default-rtdb.firebaseio.com/menu_items.json")
         }).then(function(response){
-            console.log(response.data)
             var all_menu_items = response.data;
 
             // process result and only keep items that match

@@ -17,11 +17,9 @@
         url: '/',
         templateUrl: 'src/templates/home.template.html'
       })
-    
-      // Premade list page
       .state('categories', {
         url: '/categories',
-        templateUrl: 'templates/categories.template.html',
+        templateUrl: 'src/templates/categories.template.html',
         controller: 'CategoriesController as categoriesList',
         resolve: {
           categories: ['MenuDataService', function (MenuDataService) {

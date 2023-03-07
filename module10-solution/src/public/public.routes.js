@@ -8,7 +8,7 @@ angular.module('public')
  * Configures the routes and views
  */
 routeConfig.$inject = ['$stateProvider'];
-function routeConfig ($stateProvider, urlRouterProvider) {
+function routeConfig ($stateProvider) {
   // Routes
   $stateProvider
     .state('public', {
@@ -44,11 +44,11 @@ function routeConfig ($stateProvider, urlRouterProvider) {
     .state('public.signup', {
       url: '/public/signup',
       templateUrl: 'src/public/sign-up/sign-up.html',
-      // controller: 'MenuItemsController',
-      // controllerAs: 'menuItemsCtrl',
+      controller: 'SignUpController',
+      controllerAs: 'signUpController',
       // resolve: {
-      //   menuItems: ['$stateParams','MenuService', function ($stateParams, MenuService) {
-      //     return MenuService.getMenuItems($stateParams.category);
+      //   categories: ['MenuDataService', function (MenuDataService) {
+      //     return MenuDataService.check();
       //   }]
       // }
     });

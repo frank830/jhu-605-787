@@ -117,6 +117,34 @@ body {
 a[ui-sref="admin.auth"] {
   color: #fff;
 }
+legend {
+  color: #f6b319;
+}
+body {
+  font-size: 1.2em;
+}
+input {
+  color: #000;
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+button {
+  background-color: grey;
+  font-size: 24px;
+}
+
+.ng-touched.ng-valid {
+  border: 10px green solid;
+}
+
+.ng-touched.ng-invalid {
+  border: 10px red solid;
+}
+
+#info {
+  margin-top: 20px;
+}
+
 /* END FOOTER */
 
 /********** Medium devices only **********/

@@ -7,6 +7,8 @@
     MenuDataService.$inject = ['$http'];
     function MenuDataService($http){
         var service = this;
+        
+        // service.user = {};
 
         service.getMenuItem = function(menuNumber){
           var response = $http({
@@ -30,6 +32,14 @@
               console.log("something went wrong");
           });
           return response;
+        }
+
+        service.getRegistrationInfo = function(){
+            return service.user;
+        }
+
+        service.setRegistrationInfo = function(user){
+            service.user = user;
         }
     };
     

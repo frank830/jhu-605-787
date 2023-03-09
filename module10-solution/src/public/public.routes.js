@@ -46,11 +46,12 @@ function routeConfig ($stateProvider) {
       templateUrl: 'src/public/sign-up/sign-up.html',
       controller: 'SignUpController',
       controllerAs: 'reg',
-      // resolve: {
-      //   categories: ['MenuDataService', function (MenuDataService) {
-      //     return MenuDataService.check();
-      //   }]
-      // }
+    })
+    .state('public.info', {
+      url: '/public/info',
+      templateUrl: 'src/public/info/info.html',
+      controller: 'InfoController',
+      controllerAs: 'infoCtrlroller'
     });
 }
 })();

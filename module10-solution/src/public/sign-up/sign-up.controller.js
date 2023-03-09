@@ -8,12 +8,16 @@
   function SignUpController(MenuDataService) {
     var reg = this;
 
+    reg.user = {};
+
     reg.menuNumberMsg = "";
     reg.invalidMenuNumber = false;
     
     reg.submitForm = function () {
-      reg.completed = true;
-      console.log("Valid!!!")
+      // console.log("Valid form!!!");
+      // console.log(reg.user);
+      reg.user.shortName = reg.shortName;
+      MenuDataService.setRegistrationInfo(reg.user);
     };
 
     reg.getMenuItem = function(){

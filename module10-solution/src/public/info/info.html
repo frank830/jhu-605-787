@@ -1,0 +1,66 @@
+<div class="container">
+    <h2 class="text-center">Your registered information</h2>
+
+    <div ng-if="!infoCtrlroller.checkIfRegistered()">
+        Not Signed Up Yet.
+        <a ui-sref="public.signup"></span><br class="hidden-xs"> Sign up Now!</a>
+    </div>
+
+    <div ng-if="infoCtrlroller.checkIfRegistered()">
+
+        <div class="row">
+            <div class="menu-item-description col-sm-7">
+              <h3 class="menu-item-title">First name</h3>
+              <p class="menu-item-details">{{infoCtrlroller.firstName}}</p>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="menu-item-description col-sm-7">
+              <h3 class="menu-item-title">Last name</h3>
+              <p class="menu-item-details">{{infoCtrlroller.lastName}}</p>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="menu-item-description col-sm-7">
+              <h3 class="menu-item-title">Email</h3>
+              <p class="menu-item-details">{{infoCtrlroller.email}}</p>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="menu-item-description col-sm-7">
+              <h3 class="menu-item-title">Phone</h3>
+              <p class="menu-item-details">{{infoCtrlroller.phone}}</p>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="menu-item-description col-sm-7">
+              <h3 class="menu-item-title">shortName</h3>
+              <p class="menu-item-details">{{infoCtrlroller.shortName}}</p>
+            </div>
+          </div>
+
+          <!-- <div class="row">
+            <div class="col-sm-5">
+              <div class="menu-item-photo">
+                <div>{{$ctrl.menuItem.short_name}}</div>
+                <img class="img-responsive" width="250" height="150" ng-src="images/menu/{{$ctrl.categoryShortName}}/{{$ctrl.menuItem.short_name}}.jpg" alt="{{$ctrl.menuItem.name}}">
+              </div>
+              <div class="menu-item-price">{{$ctrl.menuItem.price_small | currency}}<span> {{$ctrl.menuItem.small_portion_name}}</span> {{$ctrl.menuItem.price_large | currency}} <span>{{$ctrl.menuItem.large_portion_name}}</span></div>
+            </div>
+            <div class="menu-item-description col-sm-7">
+              <h3 class="menu-item-title">{{$ctrl.menuItem.name}}</h3>
+              <p class="menu-item-details">{{$ctrl.menuItem.description}}</p>
+            </div>
+          </div> -->
+
+    </div>
+
+</div>
+
+
+
+

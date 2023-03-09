@@ -34,20 +34,21 @@
       </span>
       <br>
 
-      <input type="text" name="shortName" placeholder="Favorite dish menu number"
-      ng-model="reg.shortName"
+      <input type="text" name="shortName" placeholder="Favorite menu number"
+      ng-model="reg.shortName" ng-change="reg.getMenuItem()"
       required>
       <span ng-if="regForm.shortName.$invalid && regForm.shortName.$touched">
         Please enter menu number
+      </span>
+      <span style="margin-top: 10px; margin-left: 10px;">
+        {{reg.menuNumberMsg}}
       </span>
       <br>
 
     <button
       ng-disabled="regForm.$invalid"
-      ng-click="reg.getMenuItem()">Submit</button>
-    <span style="margin-top: 10px; margin-left: 10px;">
-      {{reg.message}}
-    </span>
+      ng-click="reg.submitForm()">Submit</button>
+
 
       <!-- <div style="margin-top: 10px;">
         Form valid? {{ regForm.$valid }}

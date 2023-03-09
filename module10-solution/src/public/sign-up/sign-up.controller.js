@@ -8,7 +8,7 @@
   function SignUpController(MenuDataService) {
     var reg = this;
 
-    reg.message = "";
+    reg.menuNumberMsg = "";
     
     reg.submitForm = function () {
       reg.completed = true;
@@ -16,21 +16,17 @@
     };
 
     reg.getMenuItem = function(){
-      console.log(reg.shortName)
       var promise = MenuDataService.getMenuItem(reg.shortName);
-
       promise.then(function (response) {
-        console.log(response)
-        console.log(response.length)
         if(Object.keys(response).length === 0){
-          reg.message = "No such menu number exists."
+          reg.menuNumberMsg = "No such menu number exists."
         }else{
-          reg.message = response.name;
+          reg.menuNumberMsg = response.name;
         }
       })
       .catch(function (error) {
-          console.log("Something went terribly wrong.");
-          reg.message = "Something went terribly wrong.";
+          console.log(error);
+          reg.menuNumberMsg = "Something went terribly wrong.";
       });
     }
   }

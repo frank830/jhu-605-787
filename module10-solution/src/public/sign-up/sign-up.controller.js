@@ -9,6 +9,7 @@
     var reg = this;
 
     reg.menuNumberMsg = "";
+    reg.invalidMenuNumber = false;
     
     reg.submitForm = function () {
       reg.completed = true;
@@ -20,8 +21,10 @@
       promise.then(function (response) {
         if(Object.keys(response).length === 0){
           reg.menuNumberMsg = "No such menu number exists."
+          reg.invalidMenuNumber = true;
         }else{
           reg.menuNumberMsg = response.name;
+          reg.invalidMenuNumber = false;
         }
       })
       .catch(function (error) {

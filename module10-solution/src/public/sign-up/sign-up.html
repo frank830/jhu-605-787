@@ -46,7 +46,7 @@
       <br>
 
     <button
-      ng-disabled="regForm.$invalid"
+      ng-disabled="regForm.$invalid || reg.invalidMenuNumber"
       ng-click="reg.submitForm()">Submit</button>
 
 

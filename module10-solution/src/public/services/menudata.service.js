@@ -23,6 +23,7 @@
                       if(all_menu_items[shortName].menu_items[menuItem].short_name.toLowerCase() == menuNumber.toLowerCase()){
                           // description matches the searchTerm
                           foundItem = all_menu_items[shortName].menu_items[menuItem];
+                          foundItem["categoryShortName"] = shortName;
                       }
                   }
               }

@@ -14,9 +14,9 @@
     reg.invalidMenuNumber = false;
     
     reg.submitForm = function () {
-      // console.log("Valid form!!!");
-      // console.log(reg.user);
+      reg.completed = true;
       reg.user.shortName = reg.shortName;
+      reg.user.categoryShortName = reg.categoryShortName;
       MenuDataService.setRegistrationInfo(reg.user);
     };
 
@@ -26,14 +26,17 @@
         if(Object.keys(response).length === 0){
           reg.menuNumberMsg = "No such menu number exists."
           reg.invalidMenuNumber = true;
+          reg.categoryShortName = "";
         }else{
-          reg.menuNumberMsg = response.name;
+          reg.menuNumberMsg = response.name;  //show use the name of the menu item
           reg.invalidMenuNumber = false;
+          reg.categoryShortName = response.categoryShortName;
         }
       })
       .catch(function (error) {
           console.log(error);
           reg.menuNumberMsg = "Something went terribly wrong.";
+          reg.categoryShortName = "";
       });
     }
   }

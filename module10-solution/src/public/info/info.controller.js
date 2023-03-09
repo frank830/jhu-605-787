@@ -15,6 +15,7 @@
         infoCtrlroller.shortName = "";
         infoCtrlroller.title = "";
         infoCtrlroller.description = "";
+        infoCtrlroller.categoryShortName = "";
 
         infoCtrlroller.checkIfRegistered = function () {
             var userInfo = MenuDataService.getRegistrationInfo();
@@ -26,6 +27,7 @@
                 infoCtrlroller.email = userInfo.email;
                 infoCtrlroller.phone = userInfo.phone;
                 infoCtrlroller.shortName = userInfo.shortName;
+                infoCtrlroller.categoryShortName = userInfo.categoryShortName;
                 // infoCtrlroller.title = userInfo.name;
                 // infoCtrlroller.description = userInfo.description;
                 // $ctrl.basePath = ApiPath;

@@ -1,53 +1,59 @@
 <fieldset>
-    <legend>Sign up for newsletter</legend>
-    <form name='regForm' novalidate>
+  <legend>Sign up for newsletter</legend>
+  <form name='regForm' novalidate>
 
 
-      <input type="text" name="firstName" placeholder="First name"
-        ng-model="reg.user.firstName"
-        required>
-        <span ng-if="regForm.firstName.$invalid && regForm.firstName.$touched">
-          Please enter first name
-        </span>
-        <br>
-    
-        <input type="text" name="lastName" placeholder="Last name"
-        ng-model="reg.user.lastName">
-        <span ng-if="regForm.lastName.$invalid && regForm.lastName.$touched">
-          Please enter last name
-        </span>
-        <br>
+    <input type="text" name="firstName" placeholder="First name"
+      ng-model="reg.user.firstName"
+      required>
+      <span ng-if="regForm.firstName.$invalid && regForm.firstName.$touched">
+        Please enter first name
+      </span>
+      <br>
+  
+      <input type="text" name="lastName" placeholder="Last name"
+      ng-model="reg.user.lastName">
+      <span ng-if="regForm.lastName.$invalid && regForm.lastName.$touched">
+        Please enter last name
+      </span>
+      <br>
 
-        <input type="email" name="email" placeholder="Email"
-        ng-model="reg.user.email"
-        required>
-        <span ng-if="regForm.email.$invalid && regForm.email.$touched">
-          Must be a valid email address: handle@domain format
-        </span>
-        <br>
+      <input type="email" name="email" placeholder="Email"
+      ng-model="reg.user.email"
+      required>
+      <span ng-if="regForm.email.$invalid && regForm.email.$touched">
+        Must be a valid email address: handle@domain format
+      </span>
+      <br>
 
-      <!-- <input type="text" name="phone" placeholder="Phone ###-###-####"
-        ng-model="reg.user.phone"
-        pattern="(\d{3})-(\d{3})-(\d{4})">
-        <span ng-if="regForm.phone.$invalid && regForm.phone.$touched">
-          Phone must be in the format ###-###-####.
-        </span>
-        <br> -->
+    <input type="text" name="phone" placeholder="Phone ###-###-####"
+      ng-model="reg.user.phone"
+      pattern="(\d{3})-(\d{3})-(\d{4})">
+      <span ng-if="regForm.phone.$invalid && regForm.phone.$touched">
+        Phone must be in the format ###-###-####.
+      </span>
+      <br>
 
-        <input type="text" name="shortName" placeholder="Favorite dish menu number"
-        ng-model="reg.user.shortName"
-        required>
-        <span ng-if="regForm.shortName.$invalid && regForm.shortName.$touched">
-          Please enter first name
-        </span>
-        <br>
+      <input type="text" name="shortName" placeholder="Favorite dish menu number"
+      ng-model="reg.shortName"
+      required>
+      <span ng-if="regForm.shortName.$invalid && regForm.shortName.$touched">
+        Please enter menu number
+      </span>
+      <br>
 
-      <button
-        ng-disabled="regForm.$invalid"
-        ng-click="signUpController.submitForm()">Submit</button>
+    <button
+      ng-disabled="regForm.$invalid"
+      ng-click="reg.getMenuItem()">Submit</button>
+    <span style="margin-top: 10px; margin-left: 10px;">
+      {{reg.message}}
+    </span>
 
-        <!-- <div style="margin-top: 10px;">
-          Form valid? {{ regForm.$valid }}
-        </div> -->
-    </form>
-  </fieldset>
+      <!-- <div style="margin-top: 10px;">
+        Form valid? {{ regForm.$valid }}
+      </div> -->
+      
+
+
+  </form>
+</fieldset>

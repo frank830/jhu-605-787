@@ -45,7 +45,7 @@ function routeConfig ($stateProvider) {
       url: '/public/signup',
       templateUrl: 'src/public/sign-up/sign-up.html',
       controller: 'SignUpController',
-      controllerAs: 'signUpController',
+      controllerAs: 'reg',
       // resolve: {
       //   categories: ['MenuDataService', function (MenuDataService) {
       //     return MenuDataService.check();

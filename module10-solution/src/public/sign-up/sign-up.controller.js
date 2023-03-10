@@ -16,7 +16,6 @@
     reg.submitForm = function () {
       reg.completed = true;
       reg.user.shortName = reg.shortName;
-      reg.user.categoryShortName = reg.categoryShortName;
       MenuDataService.setRegistrationInfo(reg.user);
     };
 
@@ -26,11 +25,15 @@
         if(Object.keys(response).length === 0){
           reg.menuNumberMsg = "No such menu number exists."
           reg.invalidMenuNumber = true;
-          reg.categoryShortName = "";
+          reg.user.categoryShortName = "";
+          reg.user.description = "";
+          reg.user.name = "";
         }else{
           reg.menuNumberMsg = response.name;  //show use the name of the menu item
           reg.invalidMenuNumber = false;
-          reg.categoryShortName = response.categoryShortName;
+          reg.user.categoryShortName = response.categoryShortName;
+          reg.user.description = response.description;
+          reg.user.name = response.name;
         }
       })
       .catch(function (error) {

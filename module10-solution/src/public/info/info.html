@@ -36,20 +36,31 @@
             </div>
           </div>
 
+          <br><br>
           <div class="row">
             <div class="menu-item-description col-sm-7">
-              <h3 class="menu-item-title">shortName</h3>
-              <p class="menu-item-details">{{infoCtrlroller.shortName}}</p>
+              <h3 class="menu-item-title">Your Favorite Dish</h3>
             </div>
           </div>
 
           <div class="row">
             <div class="col-sm-5">
               <div class="menu-item-photo">
-                <img width="200" height="200" ng-src="images/menu/{{infoCtrlroller.categoryShortName}}/{{infoCtrlroller.shortName}}.jpg" alt="{{infoCtrlroller.name}}">
-                <span>{{infoCtrlroller.name}}</span>
+                <img width="250" height="200" ng-src="images/menu/{{infoCtrlroller.categoryShortName}}/{{infoCtrlroller.shortName}}.jpg" alt="{{infoCtrlroller.title}}">
+                <span>{{infoCtrlroller.title}}</span>
+          </div>
+
+          <div class="row">
+            <div class="menu-item-description col-sm-7">
+              <h3 class="menu-item-title">Title</h3>
+              <p class="menu-item-details">{{infoCtrlroller.title}}</p>
             </div>
-              <div class="menu-item-price">{{infoCtrlroller.menuItem.price_small | currency}}<span> {{infoCtrlroller.menuItem.small_portion_name}}</span> {{infoCtrlroller.menuItem.price_large | currency}} <span>{{infoCtrlroller.menuItem.large_portion_name}}</span></div>
+          </div>
+
+          <div class="row">
+            <div class="menu-item-description col-sm-7">
+              <h3 class="menu-item-title">Description</h3>
+              <p class="menu-item-details">{{infoCtrlroller.description}}</p>
             </div>
           </div>
 

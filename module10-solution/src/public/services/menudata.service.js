@@ -27,7 +27,6 @@
                       }
                   }
               }
-              // return processed items
               return foundItem;
           }).catch(function(error) {
               console.log("something went wrong");
